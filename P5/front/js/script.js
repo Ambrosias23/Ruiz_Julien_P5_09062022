@@ -8,8 +8,8 @@ fetch('http://localhost:3000/api/products')
   let products = value;
 for(const product of products) {
   console.log(product);
+  
   let a= document.createElement("a");
-
   let article = document.createElement("article");
   let img= document.createElement("img");
   let h3 = document.createElement ("h3");
