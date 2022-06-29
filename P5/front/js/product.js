@@ -53,25 +53,24 @@ button.addEventListener('click', function() {
 // Local storage
 
 
-const cart = JSON.parse(localStorage.getItem("cart"));
+// Listening to "click" event on cart button
+button.addEventListener('click',(event)=>{
+// Creating itemCart
+	const cartItem = {
+		productId: productId,
+		color: colors.value,
+		quantity: quantity.value,
+	}
 
-    button.onclick = () => {
-        
-		const item = {
-            productId : productId,
-            color : colors.value,
-            quantity : quantity.value,
-		}
-        
-		
-		let cart = [];
-		cart.push(item);
-		
+//Getting cart from localstorage
+	let cart = []; // Initialisation au cas ou il n'existe pas dans le LS
+	let cartFromLS = localStorage.getItem("cart");
+	if (cartFromLS !== null) {
+		cart = JSON.parse (cartFromLS);
+	}
 
-	;
-	
-    localStorage.setItem("cart",JSON.stringify(cart))
-    
-    };
-
-
+// Adding the cartItem to the cart
+	cart.push(cartItem);
+// Saving the dart to LS
+	localStorage.setItem("cart",JSON.stringify(cart));
+})
