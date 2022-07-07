@@ -62,17 +62,28 @@ button.addEventListener('click',(event)=>{
 	if(cartFromLS !== null) {
 		cart = JSON.parse(cartFromLS);
 	}
+	// Si la quantité n'est selectionner afficher un message
 	if (quantity.value <= 0) {
         console.log ("Il manque des informations");
+		
 	};
+	// Si la couleur n'est selectionner afficher un message
+	if (cartItem.color == '' || cartItem.color == null) {
+		console.log ("pb color");
+		};
 	
-	if(color = value="--SVP, choisissez une couleur --" ){
-		console.log ("mqe color");
-	};
-	// Adding the cartItem to the cart
+	for(let cartItem in cart) {
+		if (cartItem.productId == cartItem.productId && cartItem.color == cartItem.color) {
+		  // Le produit est déjà dans le panier je modifie sa quantité
+			cartItem.quantity = cartItem.quantity++;
+			console.log("quantity");
+			localStorage.setItem("cartItem.quantity",JSON.stringify(cart));
+			cart = JSON.parse(cartFromLS);
+		}
+		}
+		// Adding the cartItem to the cart
 		cart.push(cartItem);
-	// Saving the cart to LS
+		// Saving the cart to LS
 		localStorage.setItem("cart",JSON.stringify(cart));
-	
-	
+	  
 })

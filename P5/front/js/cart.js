@@ -69,6 +69,7 @@ for(key in cart) {
 
 		// Creating in quantity of <p> and <input>
 		let pQte = document.createElement("p");
+        pQte.innerText= "Qté :";
 		let input = document.createElement("input");
 		input.type = Number;
 		input.classList.add("itemQuantity");
