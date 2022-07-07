@@ -68,7 +68,6 @@ button.addEventListener('click',(event)=>{
 			if (cartFromLS !== null) {
 				cart = JSON.parse(cartFromLS);
 			}
-			
 			for(let cartItem in cart) {
 				if (cartNewItem.productId == cartItem.productId && cartNewItem.color == cartItem.color) {
 			  	//The product is already in the basket I modify this quantity
@@ -76,12 +75,13 @@ button.addEventListener('click',(event)=>{
 				console.log("quantity");
 				}
 			}
+			// Adding the cartItem to the cart
+			cart.push(cartNewItem);
+			// Saving the cart to LS
+			localStorage.setItem("cart",JSON.stringify(cart));		
 		}
 	}
-	// Adding the cartItem to the cart
-	cart.push(cartNewItem);
-	// Saving the cart to LS
-	localStorage.setItem("cart",JSON.stringify(cart));	
+	
 });
 	
 
