@@ -46,44 +46,46 @@ fetch("http://localhost:3000/api/products/"+productId)
 // Listening to "click" event on cart button
 const button = document.getElementById('addToCart');
 button.addEventListener('click',(event)=>{
-	
-	
-	// Creating itemCart
-	const cartItem = {
-		productId: productId,
-		color: colors.value,
-		quantity: quantity.value,
+	// Checking product color
+	if (colors.value =="" || colors.value == null){
+		alert("Merci de renseigner une couleur");
 	}
+	else{
+		//checking product quantity
+		if (quantity.value <= 0){
+			alert("Merci de renseigner une quantité");
+		}
+		else {
+			// Creating itemNewCart
+			const cartNewItem = {
+				productId: productId,
+				color: colors.value,
+				quantity: quantity.value,
+			}
+			// Getting cart from localstorage
+			let cart = []; // Initialization in case it does not exist in the LS
+			let cartFromLS = localStorage.getItem("cart");
+			if (cartFromLS !== null) {
+				cart = JSON.parse(cartFromLS);
+			}
+			
+			for(let cartItem in cart) {
+				if (cartNewItem.productId == cartItem.productId && cartNewItem.color == cartItem.color) {
+			  	//The product is already in the basket I modify this quantity
+				cartItem.quantity = cartItem.quantity++;
+				console.log("quantity");
+				}
+			}
+		}
+	}
+	// Adding the cartItem to the cart
+	cart.push(cartNewItem);
+	// Saving the cart to LS
+	localStorage.setItem("cart",JSON.stringify(cart));	
+});
 	
 
-	// Getting cart from localstorage
-	let cart = []; // Initialisation au cas ou il n'existe pas dans le LS
-	let cartFromLS = localStorage.getItem("cart");
-	if(cartFromLS !== null) {
-		cart = JSON.parse(cartFromLS);
-	}
-	// Si la quantité n'est selectionner afficher un message
-	if (quantity.value <= 0) {
-        console.log ("Il manque des informations");
-		
-	};
-	// Si la couleur n'est selectionner afficher un message
-	if (cartItem.color == '' || cartItem.color == null) {
-		console.log ("pb color");
-		};
 	
-	for(let cartItem in cart) {
-		if (cartItem.productId == cartItem.productId && cartItem.color == cartItem.color) {
-		  // Le produit est déjà dans le panier je modifie sa quantité
-			cartItem.quantity = cartItem.quantity++;
-			console.log("quantity");
-			localStorage.setItem("cartItem.quantity",JSON.stringify(cart));
-			cart = JSON.parse(cartFromLS);
-		}
-		}
-		// Adding the cartItem to the cart
-		cart.push(cartItem);
-		// Saving the cart to LS
-		localStorage.setItem("cart",JSON.stringify(cart));
+	
+		
 	  
-})
