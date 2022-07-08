@@ -52,7 +52,7 @@ for(key in cart) {
 		let colorProduct = document.createElement("p");
 		colorProduct.innerText = cartItem.color;
 		let priceProduct = document.createElement("p");
-		priceProduct.innerText = product.price + "€";
+		priceProduct.innerText = product.price * cartItem.quantity + "€";
 		divDescription.appendChild(h2);
 		divDescription.appendChild(colorProduct);
 		divDescription.appendChild(priceProduct);
@@ -71,7 +71,7 @@ for(key in cart) {
 		let pQte = document.createElement("p");
         pQte.innerText= "Qté :";
 		let input = document.createElement("input");
-		input.type = Number;
+		input.type = "Number";
 		input.classList.add("itemQuantity");
 		input.name = "itemQuantity";
 		input.min = 1;
@@ -88,7 +88,12 @@ for(key in cart) {
 		p.innerText = "Supprimer";
 		divSetting.appendChild(divDelete);
 		divDelete.appendChild(p);
-	})
+	
+        document.getElementById(totalQuantity)
+        for(cartItem of cart){
+            
+        }
+    })
   
 	.catch(function(err) {
 		console.log('Une erreur est survenue');

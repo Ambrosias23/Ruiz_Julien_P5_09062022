@@ -68,15 +68,18 @@ button.addEventListener('click',(event)=>{
 			if (cartFromLS !== null) {
 				cart = JSON.parse(cartFromLS);
 			}
-			for(let cartItem in cart) {
+			let isProductAlreadyInCart = false;
+			for(let cartItem of cart) {
 				if (cartNewItem.productId == cartItem.productId && cartNewItem.color == cartItem.color) {
 			  	//The product is already in the basket I modify this quantity
-				cartItem.quantity = cartItem.quantity++;
-				console.log("quantity");
+				isProductAlreadyInCart = true;
+				cartItem.quantity = parseInt(cartItem.quantity) + parseInt(cartNewItem.quantity);
 				}
 			}
 			// Adding the cartItem to the cart
-			cart.push(cartNewItem);
+			if (isProductAlreadyInCart == false){
+				cart.push(cartNewItem);
+			}
 			// Saving the cart to LS
 			localStorage.setItem("cart",JSON.stringify(cart));		
 		}
