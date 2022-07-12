@@ -1,7 +1,7 @@
 // Getting back my cart from localstorage
 let cart = []; // Initialisation au cas ou il n'existe pas dans le LS
 let cartFromLS = localStorage.getItem("cart");
-if (cartFromLS !== null) {
+if(cartFromLS !== null) {
 	cart = JSON.parse(cartFromLS);
 }
 //console.log(cart);
@@ -81,18 +81,53 @@ for(key in cart) {
 		divQuantity.appendChild(input);
 
 		// Creating divDelete and p
-		let divDelete = document.createElement("div");
-		divDelete.classList.add("cart__item__content__settings__delete");
-		let p = document.createElement("p");
-		p.classList.add("deleteItem");
-		p.innerText = "Supprimer";
-		divSetting.appendChild(divDelete);
-		divDelete.appendChild(p);
-	
-        document.getElementById(totalQuantity)
-        for(cartItem of cart){
-            
+        let divDelete = document.createElement("div");
+        divDelete.classList.add("cart__item__content__settings__delete");
+        let p = document.createElement("p");
+        p.classList.add("deleteItem");
+        p.innerText = "Supprimer";
+        divSetting.appendChild(divDelete);
+        divDelete.appendChild(p);
+        
+        // Computing cart total mount
+        let totalCartPrice = document.getElementById('totalPrice');
+        let totalCartPriceValue;
+        if(totalCartPrice.innerText == '') {
+            totalCartPriceValue = 0;
         }
+        else {
+            totalCartPriceValue = parseInt(totalCartPrice.innerText);
+        }
+            totalCartPrice.innerText = totalCartPriceValue + (parseInt(product.price) * parseInt(cartItem.quantity));
+    
+        // Computing cart total items
+        let totalCartItemQuantity = document.getElementById('totalQuantity');
+        let totalCartItemQuantityValue;
+        if(totalCartItemQuantity.innerText == '') {
+            totalCartItemQuantityValue = 0;
+        }
+        else {
+            totalCartItemQuantityValue = parseInt(totalCartItemQuantity.innerText);
+        }
+        totalCartItemQuantity.innerText = totalCartItemQuantityValue + parseInt(cartItem.quantity);
+    
+        // Handling delete button
+       
+        p.addEventListener('click',(event)=>{
+            console.log(cartItem.productId, cartItem.color);
+            let removeProductFromCart = (cartItem.productId, cartItem.color);
+            for(let cartItem of cart){
+                if(removeProductFromCart == cartItem){
+                    localStorage.removeItem(removeProductFromCart);
+                }
+                //document.location.reload();
+            }
+        });
+        // Handling quantity update
+        
+        // ...
+    
+    
     })
   
 	.catch(function(err) {

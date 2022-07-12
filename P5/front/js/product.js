@@ -4,14 +4,15 @@ let productId = url.searchParams.get('id');
 
 fetch("http://localhost:3000/api/products/"+productId)
 .then(function(res) {
-	if (res.ok) {
+	if(res.ok) {
 		return res.json();
 	}
 })
 .then(function(value) {
 	let product = value;
 	//console.log(product);
-
+	
+	title.innerText = "product.name";
 	// Assigning img data
 	let imgContainer = document.querySelector(".item__img");
 	let img = document.createElement("img");
@@ -47,12 +48,12 @@ fetch("http://localhost:3000/api/products/"+productId)
 const button = document.getElementById('addToCart');
 button.addEventListener('click',(event)=>{
 	// Checking product color
-	if (colors.value =="" || colors.value == null){
+	if(colors.value =="" || colors.value == null){
 		alert("Merci de renseigner une couleur");
 	}
 	else{
 		//checking product quantity
-		if (quantity.value <= 0){
+		if(quantity.value <= 0){
 			alert("Merci de renseigner une quantité");
 		}
 		else {
@@ -65,28 +66,36 @@ button.addEventListener('click',(event)=>{
 			// Getting cart from localstorage
 			let cart = []; // Initialization in case it does not exist in the LS
 			let cartFromLS = localStorage.getItem("cart");
-			if (cartFromLS !== null) {
+			if(cartFromLS !== null) {
 				cart = JSON.parse(cartFromLS);
 			}
 			let isProductAlreadyInCart = false;
 			for(let cartItem of cart) {
-				if (cartNewItem.productId == cartItem.productId && cartNewItem.color == cartItem.color) {
-			  	//The product is already in the basket I modify this quantity
-				isProductAlreadyInCart = true;
-				cartItem.quantity = parseInt(cartItem.quantity) + parseInt(cartNewItem.quantity);
+				if(cartNewItem.productId == cartItem.productId && cartNewItem.color == cartItem.color) {
+			  		//The product is already in the basket I modify this quantity
+					isProductAlreadyInCart = true;
+					cartItem.quantity = parseInt(cartItem.quantity) + parseInt(cartNewItem.quantity);
 				}
 			}
 			// Adding the cartItem to the cart
-			if (isProductAlreadyInCart == false){
+			if(isProductAlreadyInCart == false){
 				cart.push(cartNewItem);
 			}
 			// Saving the cart to LS
 			localStorage.setItem("cart",JSON.stringify(cart));		
+		
+			if(isProductAlreadyInCart == true){
+				setTimeout(() => {
+				console.log("Action déclenchée dans une seconde.");
+				button.innerText = "Ajouté !"; 
+			}, "1000")
 		}
 	}
+}});
 	
-});
-	
+
+
+
 
 	
 	
