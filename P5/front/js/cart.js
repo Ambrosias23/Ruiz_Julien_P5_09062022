@@ -113,18 +113,9 @@ for(key in cart) {
     
         // Handling delete button
        
-        p.addEventListener('click',(event)=>{
-            console.log(cartItem.productId, cartItem.color);
-            let removeProductFromCart = (cartItem.productId, cartItem.color);
-            for(let cartItem of cart){
-                if(removeProductFromCart == cartItem){
-                    localStorage.removeItem(removeProductFromCart);
-                }
-                //document.location.reload();
-            }
-        });
-        // Handling quantity update
         
+        // Handling quantity update
+       
         // ...
     
     

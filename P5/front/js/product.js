@@ -12,7 +12,6 @@ fetch("http://localhost:3000/api/products/"+productId)
 	let product = value;
 	//console.log(product);
 	
-	title.innerText = "product.name";
 	// Assigning img data
 	let imgContainer = document.querySelector(".item__img");
 	let img = document.createElement("img");
@@ -22,7 +21,11 @@ fetch("http://localhost:3000/api/products/"+productId)
 
 	// Assigning title data
 	title.innerText = product.name;
-
+	
+	// Name of page
+	let titleOfPage = document.querySelector("title");
+    titleOfPage.innerText = product.name;
+	
 	// Assigning price data
 	let price = document.getElementById('price');
 	price.innerText = product.price;
@@ -88,10 +91,11 @@ button.addEventListener('click',(event)=>{
 				setTimeout(() => {
 				console.log("Action déclenchée dans une seconde.");
 				button.innerText = "Ajouté !"; 
-			}, "1000")
+				}, "1000")
+			}
 		}
 	}
-}});
+});
 	
 
 
