@@ -241,6 +241,7 @@ btnSendForm.addEventListener('click', (e) => {
 	//Control final : 
 	if (firstNameControle() && lastNameControle() && addressControl() && cityControl() && emailControle()) {
 		localStorage.setItem("contact", JSON.stringify(contact));
+		
 		sendFromToServer();
 	}else{
 		alert("Veillez bien remplir le formulaire")
@@ -250,7 +251,10 @@ btnSendForm.addEventListener('click', (e) => {
 	function sendFromToServer () {
 		fetch("http://localhost:3000/api/products/order", {
 			method: "POST",
-			body:JSON.stringify({contact, cart}) ,
+			body:JSON.stringify({
+				contact : contact,
+				products : products
+			}) ,
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -263,8 +267,10 @@ btnSendForm.addEventListener('click', (e) => {
 			// If the orderId variable is not an empty string, we redirect our user to the confirmation page with the variable:
 			if (orderId != "") {
 				alert("Votre commande à bient était prise en compte");
-				location.href = "confirmation.html?id=" + orderId;
+				//location.href = "confirmation.html?id=" + orderId;
+				
 			}
 		})
 	}
 })
+
