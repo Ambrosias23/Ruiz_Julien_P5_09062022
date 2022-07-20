@@ -87,12 +87,13 @@ button.addEventListener('click',(event)=>{
 			// Saving the cart to LS
 			localStorage.setItem("cart",JSON.stringify(cart));		
 		
-			if(isProductAlreadyInCart == true){
-				setTimeout(() => {
+			button.innerText = " Ajouter dans le panier !"
+
+			setTimeout(() => {
 				console.log("Action déclenchée dans une seconde.");
-				button.innerText = "Ajouté !"; 
-				}, "1000")
-			}
+				button.innerText = "Ajouter au panier"; 
+			}, "500")
+			
 		}
 	}
 });
